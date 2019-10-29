@@ -25,3 +25,15 @@ table <- left_join(scores,
                    by = 'row'
 )
 colnames(table) <- c('index', 'type', 'Score', 'T-Score', 'row', 'title')
+
+
+
+###############Attempting to automate with multiple files##################
+temp = list.files(pattern = "*Example")
+myfiles = lapply(temp, readLines)
+myfiles2 <-map(myfiles[1:3], as_tibble(str_match(myfiles[1:3], "^(.*?)\\s+Score.*")[, 2, drop = FALSE]))
+
+myfiles2 <-map(myfiles[1:3], as_tibble)
+myfiles3 <- map(myfiles2[[1:3]], str_match(pattern =  "^(.*?)\\s+Score.*"))
+
+myfiles2[[c(1:2)]]
